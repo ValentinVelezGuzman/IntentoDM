@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { View, FlatList, Image, Text, StyleSheet, TouchableOpacity, Modal, Button } from 'react-native';
+import { View, FlatList, Image, Text, TouchableOpacity, Modal, Button } from 'react-native';
 import { Appbar, Card, Divider } from 'react-native-paper';
 import favoritesStyles from '../styles/favoritesStyles';
+import Navigation from './Navigation';
 
 const Favorites = ({ navigation }) => {
     const [modalVisible, setModalVisible] = React.useState(false);

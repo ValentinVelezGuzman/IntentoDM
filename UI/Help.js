@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
 import { Button, TextInput, RadioButton, Text, Card } from 'react-native-paper';
 import styles from '../styles/styleHelp';
+import Navigation from './Navigation';
+import styleNavegation from '../styles/styleNavegation';
 
-const Help = () => {
+const Help = (navigation) => {
     const [requestType, setRequestType] = useState('queja');
 
     return (

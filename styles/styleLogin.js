@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
-    marginBottom: 10
   },
   logo: {
     fontSize: 100,

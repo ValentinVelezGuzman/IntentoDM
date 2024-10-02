@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import stylesC from "../styles/stylesCategory";
 import styles from "../styles/styleItemList";
 import itemGroup from "../arrayData/itemGroup";
+import Navigation from "./Navigation";
 
 const CategoryList = () => {
 
@@ -45,7 +46,11 @@ const CategoryList = () => {
     );
 
     return (
+        
         <View style={styles.containerP}>
+            <View style={styles.overlay}>
+                <Navigation navigation={navigation} />
+            </View>
             <SectionList
                 sections={categories}
                 keyExtractor={(item) => item.id.toString()}

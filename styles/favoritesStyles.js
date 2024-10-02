@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-const myPurchasesStyles = StyleSheet.create({
+const favoritesStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffffff',
@@ -56,21 +56,22 @@ const myPurchasesStyles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
     },
+    modalImage: {
+        width: 120,
+        height: 120,
+        borderRadius: 8,
+        marginBottom: 16,
+    },
     modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 12,
+        marginBottom: 8,
     },
-    input: {
-        width: '100%',
-        height: 100,
-        borderColor: '#cccccc',
-        borderWidth: 1,
-        borderRadius: 8,
-        padding: 8,
-        marginBottom: 12,
-        textAlignVertical: 'top',
+    modalStatus: {
+        fontSize: 16,
+        color: '#666666',
+        marginBottom: 16,
     },
 });
 
-export default myPurchasesStyles;
+export default favoritesStyles;

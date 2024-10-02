@@ -3,6 +3,7 @@ import { View, Text, FlatList, Image, Pressable, TextInput } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import styles from "../styles/styleItemList";
 import itemGroup from "../arrayData/itemGroup"
+import Navigation from "./Navigation";
 
 const ItemList = () => {
 
@@ -50,6 +51,9 @@ const ItemList = () => {
 
     return (
         <View style={styles.containerP}>
+            <View style={styles.overlay}>
+                <Navigation navigation={navigation} />
+            </View>
             <TextInput
                 style={styles.searchBar}
                 placeholder="Buscar artículos..."

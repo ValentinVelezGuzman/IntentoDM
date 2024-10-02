@@ -5,10 +5,11 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
 
     input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        padding: 10,
         marginBottom: 10,
+    },
+    inputFullWidth: {
+      width: '100%', // Ocupar todo el ancho disponible
+      marginVertical: 8, // Añadir espacio vertical entre inputs
     },
     containerPUR: {
         flex: 1,
@@ -23,20 +24,15 @@ const styles = StyleSheet.create({
         width: width * 0.9, 
         height: height * 0.8, 
         justifyContent: 'center',
-        alignItems: 'center',
-      },
-      container2UR: {
-        justifyContent: 'center',
-        alignItems: 'center', 
+        elevation: 3,
       },
       text: {
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 15,
       },
       title1: {
         textAlign: 'center',
         fontSize: 20,
-        color: 'white',
+        color: 'black',
         fontFamily: 'Rockwell',
         fontWeight: '900',
       },
