@@ -1,13 +1,17 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign';
+import React, {} from 'react'
 
-import React from 'react'
-
-const StarsRating = () => {
+const StarsRating = ({onPressFuntion, star}) => {
   return (
-    <View>
-      <Text>StarsRating</Text>
-
-    </View>
+    <Pressable
+        onPress={onPressFuntion}>
+        <Icon 
+            name={star}
+            size={25}
+            color={star=='star' ? '#FFD700' : '#000'}//operador ternario
+        />
+    </Pressable>
   )
 }
 
