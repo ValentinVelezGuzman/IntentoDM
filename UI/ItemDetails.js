@@ -11,10 +11,8 @@ const ItemDetails = () => {
         <View style={styles.backgroundContainer}>
             {/* Mitad izquierda del fondo */}
             <View style={styles.halfBackgroundLeft} />
-            
             {/* Mitad derecha del fondo */}
             <View style={styles.halfBackgroundRight} />
-            
             {/* Contenido dentro del ScrollView */}
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.card}>
@@ -22,7 +20,6 @@ const ItemDetails = () => {
                     <Text style={styles.nameItem}>{itemData.nameItem}</Text>
                     <Text style={styles.categoryItem}>{itemData.category}</Text>
                     <Text style={styles.priceItem}>Precio: {itemData.price} {itemData.discount && (<Text style={styles.discountItem}> Ahora -{itemData.discount}%</Text>)}</Text>
-                    
                     <Text style={styles.ProductFeaturesItem}>Descripción: {itemData.description}</Text>
                     <Text style={styles.ProductFeaturesItem}>{itemData.ProductFeaturesItem}</Text>
                 </View>

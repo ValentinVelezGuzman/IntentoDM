@@ -9,6 +9,7 @@ const itemGroup = [
         category: 'Bebidas',
         ProductFeaturesItem: 'Café de origen colombiano, cultivado en la región cafetera. Sabor intenso y aroma cautivador. Ideal para preparar espresso, americano o cualquier bebida a base de café.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito', 'Transferencia bancaria'],
+        
     },
     {
         id: 2,
