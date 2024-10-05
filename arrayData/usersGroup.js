@@ -6,7 +6,7 @@ const usersGroup = [
         nameUser: 'Usuario Primero',
         age: 21,
         user: 'user1',
-        password: 'User@1'
+        password: 'User#1'
         
     },
     {
