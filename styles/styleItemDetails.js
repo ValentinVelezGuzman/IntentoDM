@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -43,15 +43,10 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         alignItems: 'flex-start',
     },
-    tonalButton: {
-        marginVertical: 10,
-        borderRadius: 10, // Estilo del botón
-        backgroundColor: '#4cad42',
-    },
     buttonLabel: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: 'black', // Cambiar el color del texto si es necesario
+        color: 'black',
     },
     productInfoContainer: {
         justifyContent: 'center',
@@ -100,7 +95,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     elevatedButton: {
-        marginVertical:5,
         justifyContent: 'center',
         alignSelf: 'center',
     },
@@ -141,6 +135,70 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         textAlign: 'left',
         marginBottom: 10,
+    },
+    paymentMethodsContainer: {
+        marginVertical: 10,
+        paddingHorizontal: 20,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    paymentMethodsTitle: {
+        fontSize: 18,
+        fontFamily: 'Helvetica',
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: 'black',
+    },
+    paymentMethodOption: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
+    buttonsGridContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        marginTop: 15,
+    },
+    gridButton: {
+        flexBasis: '48%',
+        marginVertical: 5,
+    },
+    button: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 15,
+        borderRadius: 10,
+        elevation: 3,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    TextButtonMenu: {
+        fontWeight: '900',
+    },
+    ButtonCar: {
+        alignItems: 'center', 
+    },
+    inputComment: {
+        borderColor: '#ccc',
+        borderWidth: 1,
+        padding: 10,
+        marginVertical: 10,
+        width: width * 0.8,
+        borderRadius: 5,
+        fontSize: 16,
+    },
+    commentButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginVertical: 2,
+    },
+    cancelButton: {
+        marginLeft: 10,
     },
 });
 

@@ -1,26 +1,101 @@
 import React, { useState } from "react";
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView, Alert, TextInput } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { Button } from 'react-native-paper';  // Usar el botón de React Native Paper
+import { Button, RadioButton } from 'react-native-paper';  
 import styles from "../styles/styleItemDetails";
 import StarsRating from "./StarsRating";
 
 const ItemDetails = () => {
     const [raiting, setRaiting] = useState(0);
-    const [isFeaturesVisible, setIsFeaturesVisible] = useState(false);  // Estado para controlar la visibilidad
+    const [isFeaturesVisible, setIsFeaturesVisible] = useState(false);  
+    const [paymentMethod, setPaymentMethod] = useState(''); 
+    const [showPaymentMethods, setShowPaymentMethods] = useState(false); 
+    const [newComment, setNewComment] = useState(''); 
+    const [showCommentInput, setShowCommentInput] = useState(false); 
+    const [question, setQuestion] = useState(''); 
+    const [showQuestionInput, setShowQuestionInput] = useState(false);
 
     const route = useRoute();
-    const { itemData } = route.params; // Datos del producto
+    const { itemData } = route.params;
+
+    const handleCommentButtonClick = () => {
+        let message = '';
+        if (itemData.comments.length === 0) {
+            message = 'No hay comentarios para este artículo.';
+        } else {
+            message = itemData.comments.join('\n\n');
+        }
+
+        Alert.alert(
+            "Comentarios",
+            message,
+            [
+                {
+                    text: "Cerrar",
+                    style: "cancel",
+                },
+                {
+                    text: "+",
+                    onPress: () => setShowCommentInput(true),
+                }
+            ],
+            { cancelable: true }
+        );
+    };
+
+    const handleAddComment = () => {
+        if (newComment.length === 0) {
+            Alert.alert("El comentario no puede estar vacío.");
+            return;
+        }
+        if (newComment.length > 200) {
+            Alert.alert("El comentario no puede tener más de 200 caracteres.");
+            return;
+        }
+        itemData.comments.push(newComment);
+        setNewComment('');
+        setShowCommentInput(false);
+        Alert.alert("Comentario agregado con éxito.");
+    };
+
+    const handleCancelComment = () => {
+        setNewComment('');
+        setShowCommentInput(false);
+        Alert.alert("Creación de comentario cancelada.");
+    };
+
+    const handleTogglePaymentMethods = () => {
+        if (showPaymentMethods) {
+            setPaymentMethod('');
+        }
+        setShowPaymentMethods(!showPaymentMethods);
+    };
+
+    const handleAskButtonClick = () => {
+        setShowQuestionInput(true); 
+    };
+
+    const handleSendQuestion = () => {
+        if (question.length === 0) {
+            Alert.alert("La pregunta no puede estar vacía.");
+            return;
+        }
+        setQuestion(''); 
+        setShowQuestionInput(false);
+        Alert.alert("Tu pregunta ha sido enviada.");
+    };
+
+    const handleCancelQuestion = () => {
+        setQuestion(''); 
+        setShowQuestionInput(false);
+        Alert.alert("Pregunta cancelada.");
+    };
 
     return (
         <View style={styles.backgroundContainer}>
-            {/* Mitad izquierda del fondo */}
             <View style={styles.halfBackgroundLeft} />
-            {/* Mitad derecha del fondo */}
             <View style={styles.halfBackgroundRight} />
-            {/* Contenido dentro del ScrollView */}
             <ScrollView contentContainerStyle={styles.scrollContent}>
-
                 <View style={styles.card}>
                     <View style={styles.starsContainer}>
                         <Image style={styles.image} source={itemData.image} />
@@ -39,20 +114,79 @@ const ItemDetails = () => {
                         <Text style={{ fontWeight: 'bold' }}>Descripción: </Text>
                         {itemData.description}
                     </Text>
-                    <Button
-                        mode="elevated"
-                        onPress={() => setIsFeaturesVisible(!isFeaturesVisible)}
-                        rippleColor='#4cad42'
-                        buttonColor="#4cad4299"
-                        style={styles.elevatedButton} 
-                        labelStyle={styles.buttonLabel} 
-                        contentStyle={styles.buttonContent}  
-                    >
-                        {isFeaturesVisible ? "Ocultar Características" : "Mostrar Características"}
-                    </Button>
+
+                    <View style={styles.buttonsGridContainer}>
+                        <Button
+                            mode="contained"
+                            buttonColor="#4cad42"
+                            style={styles.gridButton}
+                            onPress={handleCommentButtonClick} 
+                        >
+                            <Text style={styles.TextButtonMenu}>Comentarios</Text>
+                        </Button>
+
+                        <Button
+                            mode="contained"
+                            buttonColor="#4cad42"
+                            style={styles.gridButton}
+                            onPress={handleAskButtonClick}
+                        >
+                            <Text style={styles.TextButtonMenu}>Preguntar</Text>
+                        </Button>
+
+                        <Button
+                            mode="contained"
+                            buttonColor='#99c454'
+                            style={styles.gridButton}
+                            onPress={handleTogglePaymentMethods}
+                        >
+                            <Text style={styles.TextButtonMenu}>
+                                {showPaymentMethods ? "Ocultar" : "Comprar"}
+                            </Text>
+                        </Button>
+                        
+                        <Button
+                            mode="contained"
+                            buttonColor="#4cad42"
+                            style={styles.gridButton} 
+                            labelStyle={styles.TextButtonMenu}                       
+                            onPress={() => setIsFeaturesVisible(!isFeaturesVisible)}
+                        >
+                            {isFeaturesVisible ? "Ocultar" : "Características"} 
+                        </Button>
+                    </View>
 
                     {isFeaturesVisible && ( 
                         <Text style={styles.ProductFeaturesItem}>{itemData.ProductFeaturesItem}</Text>
+                    )}
+
+                    {showPaymentMethods && (
+                        <View>
+                            <View style={styles.paymentMethodsContainer}>
+                                <Text style={styles.paymentMethodsTitle}>Selecciona tu método de pago:</Text>
+                                <RadioButton.Group
+                                    onValueChange={newValue => setPaymentMethod(newValue)}
+                                    value={paymentMethod}
+                                >
+                                    {itemData.paymentMethods.map((method, index) => (
+                                        <View style={styles.paymentMethodOption} key={index}>
+                                            <RadioButton value={method.toLowerCase()} color="#4cad42"/>
+                                            <Text style={styles.categoryItem}>{method}</Text>
+                                        </View>
+                                    ))}
+                                </RadioButton.Group>
+                            </View>
+                            <View style={styles.ButtonCar}> 
+                                <Button
+                                    mode="contained"
+                                    buttonColor="#4cad42"
+                                    style={styles.gridButton} 
+                                    onPress={() => alert("Enviado al carrito")}
+                                >
+                                    <Text style={styles.TextButtonMenu}>Enviar al Carrito</Text>
+                                </Button>
+                            </View> 
+                        </View>
                     )}
 
                     <View style={styles.starsContainer}>
@@ -67,11 +201,64 @@ const ItemDetails = () => {
                             ))}
                         </View>
                     </View>
-                </View>
 
-                <View style={styles.card}>
-                
-                </View>
+                    {showCommentInput && (
+                        <View>
+                            <TextInput
+                                style={styles.inputComment}
+                                placeholder="Escribe tu comentario (máx. 200 caracteres)"
+                                value={newComment}
+                                onChangeText={setNewComment}
+                                maxLength={200}
+                            />
+                            <View style={styles.commentButtonContainer}>
+                                <Button
+                                    mode="contained"
+                                    buttonColor="#4cad42"
+                                    onPress={handleAddComment}
+                                >
+                                    Enviar
+                                </Button>
+                                <Button
+                                    mode="contained"
+                                    buttonColor="#d9534f"
+                                    onPress={handleCancelComment}
+                                    style={styles.cancelButton}
+                                >
+                                    Cancelar
+                                </Button>
+                            </View>
+                        </View>
+                    )}
+
+                    {showQuestionInput && (
+                        <View>
+                            <TextInput
+                                style={styles.inputComment}
+                                placeholder="Escribe tu pregunta"
+                                value={question}
+                                onChangeText={setQuestion}
+                            />
+                            <View style={styles.commentButtonContainer}>
+                                <Button
+                                    mode="contained"
+                                    buttonColor="#4cad42"
+                                    onPress={handleSendQuestion}
+                                >
+                                    Enviar Pregunta
+                                </Button>
+                                <Button
+                                    mode="contained"
+                                    buttonColor="#d9534f"
+                                    onPress={handleCancelQuestion}
+                                    style={styles.cancelButton}
+                                >
+                                    Cancelar Pregunta
+                                </Button>
+                            </View>
+                        </View>
+                    )}
+                </View>        
             </ScrollView>
         </View>
     );

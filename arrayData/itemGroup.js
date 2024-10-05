@@ -9,7 +9,11 @@ const itemGroup = [
         category: 'Bebidas',
         ProductFeaturesItem: 'Café de origen colombiano, cultivado en la región cafetera. Sabor intenso y aroma cautivador. Ideal para preparar espresso, americano o cualquier bebida a base de café.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito', 'Transferencia bancaria'],
-        
+        comments: [
+            '¡Excelente café! El sabor es increíble, lo recomiendo.',
+            'Muy buen producto, pero me gustaría que el empaque fuera más grande.'
+        ],
+        rating: 5
     },
     {
         id: 2,
@@ -21,6 +25,12 @@ const itemGroup = [
         category: 'Alimentos',
         ProductFeaturesItem: 'Arroz blanco de grano largo, ideal para acompañar tus platos favoritos. Cocción rápida y textura suave. Fuente de energía natural.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito'],
+        comments: [
+            'El arroz tiene muy buena calidad y su cocción es rápida.',
+            'El precio es justo, pero el paquete debería ser un poco más grande.',
+            'Perfecto para acompañar cualquier comida, muy recomendable.'
+        ],
+        rating: 4
     },
     {
         id: 3,
@@ -31,6 +41,11 @@ const itemGroup = [
         category: 'Electrónica',
         ProductFeaturesItem: 'Audífonos inalámbricos con cancelación activa de ruido. Sonido envolvente y bajos profundos. Batería de larga duración. Perfectos para escuchar música y realizar llamadas.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito', 'PayPal'],
+        comments: [
+            'El sonido es excelente, pero la batería no dura tanto como esperaba.',
+            'Cancelación de ruido impresionante, y son muy cómodos.'
+        ],
+        rating: 4
     },
     {
         id: 4,
@@ -42,6 +57,12 @@ const itemGroup = [
         category: 'Electrónica',
         ProductFeaturesItem: 'Televisor de 55 pulgadas con resolución 4K Ultra HD. Smart TV con acceso a tus aplicaciones favoritas y asistente de voz integrado. Disfruta de colores vibrantes y un contraste excepcional.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito', 'Transferencia bancaria', 'PayPal'],
+        comments: [
+            'La calidad de imagen es impresionante. ¡Me encanta!',
+            'Buena calidad, pero a veces el sistema operativo es un poco lento.',
+            'Es perfecto para ver películas en 4K, una experiencia inmersiva.'
+        ],
+        rating: 5
     },
     {
         id: 5,
@@ -53,6 +74,11 @@ const itemGroup = [
         category: 'Electrónica',
         ProductFeaturesItem: 'Mouse inalámbrico con diseño ergonómico para reducir la fatiga en la mano. Conexión Bluetooth y sensor de alta precisión. Ideal para trabajar y jugar.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito'],
+        comments: [
+            'Muy cómodo de usar, perfecto para largas sesiones de trabajo.',
+            'Funciona muy bien, pero me gustaría que la batería durara más tiempo.'
+        ],
+        rating: 4
     },
     {
         id: 6,
@@ -64,6 +90,11 @@ const itemGroup = [
         category: 'Electrónica',
         ProductFeaturesItem: 'Laptop gaming con procesador de última generación, tarjeta gráfica dedicada y pantalla de alta frecuencia de actualización. Disfruta de tus juegos favoritos con gráficos fluidos y sin retrasos.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito', 'Transferencia bancaria', 'PayPal'],
+        comments: [
+            'El rendimiento es increíble, puedo jugar cualquier juego sin problemas.',
+            'Muy buena para juegos, pero se calienta un poco cuando se usa por mucho tiempo.'
+        ],
+        rating: 5
     },
     {
         id: 7,
@@ -75,6 +106,11 @@ const itemGroup = [
         category: 'Muebles',
         ProductFeaturesItem: 'Silla de oficina ajustable en altura y respaldo, con reposabrazos acolchados. Diseñada para brindar comodidad y soporte durante largas jornadas de trabajo.',
         paymentMethods: ['Efectivo', 'Transferencia bancaria'],
+        comments: [
+            'Muy cómoda, perfecta para largas horas de trabajo.',
+            'Buena silla, pero el montaje es algo complicado.'
+        ],
+        rating: 4
     },
     {
         id: 8,
@@ -85,6 +121,11 @@ const itemGroup = [
         category: 'Muebles',
         ProductFeaturesItem: 'Escritorio de madera maciza con amplio espacio de trabajo. Diseño moderno y minimalista. Perfecto para cualquier espacio de trabajo.',
         paymentMethods: ['Efectivo', 'Tarjeta de crédito'],
+        comments: [
+            'Es un escritorio muy elegante y resistente. Me encanta el diseño.',
+            'El tamaño es ideal y tiene mucho espacio para trabajar cómodamente.'
+        ],
+        rating: 4
     }
 ];
 
