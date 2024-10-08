@@ -2,76 +2,118 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-const favoritesStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        position: 'relative',
     },
-    appbar: {
+    halfBackgroundLeft: {
+        backgroundColor: '#4cad42',
+        position: 'absolute',
+        left: 0,
+        width: '50%',
+        height: '100%',
+        zIndex: -1,
+    },
+    halfBackgroundRight: {
         backgroundColor: '#0c9942',
+        position: 'absolute',
+        right: 0,
+        width: '50%',
+        height: '100%',
+        zIndex: -1,
     },
-    listContainer: {
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-    },
-    card: {
-        marginVertical: 8,
-        padding: 8,
-        borderRadius: 8,
-        elevation: 4,
-        backgroundColor: '#f9f9f9',
-    },
-    cardContent: {
-        flexDirection: 'row',
+    titleContainer: {
+        backgroundColor: '#ffffff',
+        padding: 15,
+        marginHorizontal: 15,
+        marginTop: 10,
+        borderRadius: 10,
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        marginBottom: 15,
         alignItems: 'center',
     },
-    cardImage: {
+    titleContainer2: {
+        backgroundColor: '#ffffff',
+        padding: 15,
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333',
+    },
+    listContent: {
+        paddingBottom: 20,
+        paddingHorizontal: 15,
+    },
+    favoriteItem: {
+        flexDirection: 'row',
+        backgroundColor: '#ffffff',
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+    },
+    thumbnail: {
         width: 80,
         height: 80,
-        borderRadius: 8,
-        marginRight: 16,
+        marginRight: 10,
     },
-    textContainer: {
-        flex: 1,
-    },
-    description: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 4,
-    },
-    status: {
-        fontSize: 14,
-        color: '#888888',
-    },
-    modalContainer: {
+    itemDetails: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
-    modalContent: {
-        width: width * 0.9,
-        backgroundColor: '#ffffff',
-        padding: 16,
-        borderRadius: 8,
-        alignItems: 'center',
-    },
-    modalImage: {
-        width: 120,
-        height: 120,
-        borderRadius: 8,
-        marginBottom: 16,
-    },
-    modalTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 8,
-    },
-    modalStatus: {
+    itemDescription: {
         fontSize: 16,
-        color: '#666666',
-        marginBottom: 16,
+        color: '#333',
+        marginBottom: 5,
+    },
+    itemStatus: {
+        fontSize: 14,
+        color: '#666',
+    },
+    nameItem: {
+        fontSize: 16,
+        color: 'black',
+        fontWeight: 'bold',
+    },
+    statusText: {
+        fontWeight: 'bold',
+    },
+    buyMoreButton: {
+        backgroundColor: '#4cad42',
+        padding: 15,
+        borderRadius: 5,
+        marginHorizontal: 15,
+        marginBottom: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buyMoreButtonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#ffffff',
+    },
+    noUserText: {
+        fontSize: 16,
+        color: '#333',
+        textAlign: 'center',
+        marginTop: 20,
     },
 });
 
-export default favoritesStyles;
+export default styles;

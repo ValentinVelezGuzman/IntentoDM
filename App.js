@@ -20,24 +20,24 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <CartProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name={"Login"} component={Login} options={{ title: 'Bienvenido' }}/>
-          <Stack.Screen name={"UserRegistration"} component={UserRegistration} options={{ title: 'Registro de Usuario' }}/>
-          <Stack.Screen name={"ItemList"} component={ItemList} options={{ title: 'Lista de Articulos' }}/>
-          <Stack.Screen name={"ItemDetails"} component={ItemDetails} options={{ title: 'Detalles de Articulos' }}/>
-          <Stack.Screen name={"Help"} component={Help} options={{ title: 'Ayudas' }}/>
-          <Stack.Screen name={"Category"} component={Category} options={{ title: 'Category' }}/>
-          <Stack.Screen name={"Offers"} component={Offers} options={{ title: 'Ofertas' }}/>
-          <Stack.Screen name={"UserProfile"} component={UserProfile} options={{ title: 'Perfil de Usuario' }}/>
-          <Stack.Screen name={"Favorites"} component={Favorites} options={{ title: 'Favoritos'}}/>
-          <Stack.Screen name={"ShoppingCar"} component={ShoppingCar} options={{ title: 'Carrito de Compras'}}/>
-          <Stack.Screen name={"PaymentBranch"} component={PaymentBranch} options={{ title: 'Sucursal de Pago'}}/>
-          <Stack.Screen name={"MyPurchases"} component={MyPurchases} options={{ title: 'Mis Compras'}}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </CartProvider>
+      <CartProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name={"Login"} component={Login} options={{ title: 'Bienvenido' }}/>
+            <Stack.Screen name={"UserRegistration"} component={UserRegistration} options={{ title: 'Registro de Usuario' }}/>
+            <Stack.Screen name={"ItemList"} component={ItemList} options={{ title: 'Lista de Articulos' }}/>
+            <Stack.Screen name={"ItemDetails"} component={ItemDetails} options={{ title: 'Detalles de Articulos' }}/>
+            <Stack.Screen name={"Help"} component={Help} options={{ title: 'Ayudas' }}/>
+            <Stack.Screen name={"Category"} component={Category} options={{ title: 'Category' }}/>
+            <Stack.Screen name={"Offers"} component={Offers} options={{ title: 'Ofertas' }}/>
+            <Stack.Screen name={"UserProfile"} component={UserProfile} options={{ title: 'Perfil de Usuario' }}/>
+            <Stack.Screen name={"Favorites"} component={Favorites} options={{ title: 'Favoritos'}}/>
+            <Stack.Screen name={"ShoppingCar"} component={ShoppingCar} options={{ title: 'Carrito de Compras'}}/>
+            <Stack.Screen name={"PaymentBranch"} component={PaymentBranch} options={{ title: 'Sucursal de Pago'}}/>
+            <Stack.Screen name={"MyPurchases"} component={MyPurchases} options={{ title: 'Mis Compras'}}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </CartProvider>
   );
 }
 

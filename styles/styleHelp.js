@@ -1,11 +1,33 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+    backgroundContainer: {
+        flex: 1,
+        position: 'relative',
+    },
+    halfBackgroundLeft: {
+        backgroundColor: '#4cad42',
+        position: 'absolute',
+        left: 0,
+        width: '50%',
+        height: '100%',
+        zIndex: -1,
+    },
+    halfBackgroundRight: {
+        backgroundColor: '#0c9942',
+        position: 'absolute',
+        right: 0,
+        width: '50%',
+        height: '100%',
+        zIndex: -1,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f2f2f2',
+        backgroundColor: 'transparent', // To keep it transparent and show the background colors
     },
     card: {
         width: '90%',

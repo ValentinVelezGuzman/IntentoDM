@@ -1,9 +1,23 @@
-import React from 'react';
-import { View, Text, Image, FlatList } from 'react-native';
+import React, { useReducer } from 'react';
+import { View, Text, Image, FlatList, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/styleMyPurchases';
 
+const statusColorReducer = (status) => {
+    switch (status) {
+        case 'Entregado':
+            return '#4cad42'; 
+        case 'En tránsito':
+            return '#FFCC00';
+        case 'Cancelado':
+            return '#D9534F';
+        default:
+            return '#000';
+    }
+};
+
 const MyPurchases = () => {
-    // Sample data for purchases
+    const navigation = useNavigation();
     const purchases = [
         {
             id: 1,
@@ -25,13 +39,11 @@ const MyPurchases = () => {
         },
     ];
 
+    const [_, dispatch] = useReducer(statusColorReducer, '#000');
+//status: The current value of this _
+//dispatch: A function used to send (or "dispatch") actions to the reducer to update the state.
     const renderPurchaseItem = ({ item }) => {
-        // Define the color based on the status
-        const statusColor = {
-            'Entregado': '#4cad42', // Green
-            'En tránsito': '#FFCC00', // Yellow
-            'Cancelado': '#D9534F', // Red
-        }[item.status] || '#000'; // Default to black if status is unknown
+        const color = statusColorReducer(item.status);
 
         return (
             <View style={styles.purchaseItem}>
@@ -39,7 +51,7 @@ const MyPurchases = () => {
                 <View style={styles.itemDetails}>
                     <Text style={styles.itemDescription}>{item.description}</Text>
                     <Text style={styles.itemStatus}>
-                        Estado: <Text style={[styles.statusText, { color: statusColor }]}>{item.status}</Text>
+                        Estado: <Text style={[styles.statusText, { color }]}>{item.status}</Text>
                     </Text>
                 </View>
             </View>
@@ -48,13 +60,27 @@ const MyPurchases = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Mis Compras</Text>
+            <View style={styles.halfBackgroundLeft} />
+            <View style={styles.halfBackgroundRight} />
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Mis Compras</Text>
+            </View>
+
             <FlatList
                 data={purchases}
                 renderItem={renderPurchaseItem}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={styles.listContent}
             />
+
+            <View style={styles.titleContainer2}>
+                <Pressable
+                    style={styles.buyMoreButton}
+                    onPress={() => navigation.navigate('ItemList')}
+                >
+                    <Text style={styles.buyMoreButtonText}>Comprar más Productos</Text>
+                </Pressable>
+            </View>
         </View>
     );
 };

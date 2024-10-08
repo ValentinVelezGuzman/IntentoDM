@@ -74,8 +74,7 @@ const ShoppingCar = () => {
             <View style={styles.halfBackgroundLeft} />
             <View style={styles.halfBackgroundRight} />
             <View style={styles.container}>
-                {/* Top Bar: Shows Total Price and "Make Payment" button */}
-                <View style={styles.addMoreProductsContainer}>
+                 <View style={styles.addMoreProductsContainer}>
                     <Pressable
                         style={styles.addMoreButton}
                         onPress={() => alert('Regresar a la tienda para agregar más productos')}
@@ -84,8 +83,6 @@ const ShoppingCar = () => {
                     </Pressable>
                 </View>
 
-
-                {/* List of Products */}
                 <FlatList
                     data={cartItems}
                     renderItem={renderCartItem}
@@ -93,11 +90,12 @@ const ShoppingCar = () => {
                     style={styles.cartList}
                 />
 
-                {/* Button to Add More Products */}
                 <View style={styles.topBar}>
                     <Text style={styles.totalText}>Total a pagar: ${totalPrice}</Text>
                     {cartItems.length > 0 && (
-                        <Pressable style={styles.paymentButton} onPress={handleNavigateToPayment}>
+                        <Pressable 
+                        style={styles.paymentButton} 
+                        onPress={handleNavigateToPayment}>
                         <Text style={styles.paymentButtonText}>Realizar Pago</Text>
                     </Pressable>
                     )}

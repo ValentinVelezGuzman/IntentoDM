@@ -9,8 +9,8 @@ const PaymentBranch = () => {
     const [totalAmount, setTotalAmount] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState('PSE');
 
+// Calculate the total whenever the items in the cart change
     useEffect(() => {
-        // Calculate the total amount whenever cartItems change
         const newTotal = cartItems.reduce((sum, item) => {
             const itemPrice = item.discount 
                 ? item.price * (1 - item.discount / 100) 
@@ -49,7 +49,7 @@ const PaymentBranch = () => {
 
     return (
         <View style={styles.container}>
-            {/* Background split for the list area */}
+            
             <View style={styles.halfBackgroundLeft} />
             <View style={styles.halfBackgroundRight} />
 
@@ -61,7 +61,6 @@ const PaymentBranch = () => {
                 contentContainerStyle={styles.cartListContent}
             />
 
-            {/* White background container for total, payment methods, and pay button */}
             <View style={styles.paymentSectionContainer}>
                 <View style={styles.totalAmountContainer}>
                     <Text style={styles.totalAmountText}>Total a pagar: ${totalAmount}</Text>
