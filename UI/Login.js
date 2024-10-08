@@ -10,7 +10,6 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState(''); 
 
   const handleLogin = () => {
-    // Search if a user exists
     const user = usersGroup.find(
       (u) => u.user === username && u.password === password
     );

@@ -77,14 +77,14 @@ const UserRegistration = () => {
     } else {
       // Crear el nuevo usuario
       const newUser = {
-        id: usersGroup.length + 1, // Nuevo ID basado en la longitud del array
-        image: require('../images/imgUsers/u1.png'), // Imagen por defecto
+        id: usersGroup.length + 1, 
+        image: require('../images/imgUsers/u1.png'), 
         nameUser: user,
-        age: age, // Edad calculada
+        age: age, 
         user: user,
-        password: password, // Almacenar la contraseña ingresada
+        password: password, 
       };
-      // Agregar el nuevo usuario al array
+    
       usersGroup.push(newUser);
       console.log(usersGroup);
       Alert.alert('Usuario registrado exitosamente');

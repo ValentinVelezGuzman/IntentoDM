@@ -10,14 +10,16 @@ const usersGroup = [
             {
                 itemId: 1,
                 quantity: 2,
-                status: 'Entregado', // Delivered
+                status: 'Entregado',
             },
             {
                 itemId: 3,
                 quantity: 1,
-                status: 'En tránsito', // In transit
+                status: 'En tránsito',
             }
         ],
+        isLoggedIn: true,
+        favorites: [6, 7, 8],
     },
     {
         id: 2,
@@ -30,14 +32,16 @@ const usersGroup = [
             {
                 itemId: 2,
                 quantity: 3,
-                status: 'Entregado', // Delivered
+                status: 'Entregado',
             },
             {
                 itemId: 4,
                 quantity: 1,
-                status: 'Cancelado', // Cancelled
+                status: 'Cancelado', 
             }
         ],
+        isLoggedIn: false,
+        favorites: [6, 7, 8],
     },
     {
         id: 3,
@@ -50,14 +54,16 @@ const usersGroup = [
             {
                 itemId: 5,
                 quantity: 1,
-                status: 'En tránsito', // In transit
+                status: 'En tránsito', 
             },
             {
                 itemId: 6,
                 quantity: 1,
-                status: 'Entregado', // Delivered
+                status: 'Entregado', 
             }
         ],
+        isLoggedIn: false,
+        favorites: [6, 7, 8],
     },
 ];
 

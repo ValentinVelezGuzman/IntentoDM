@@ -1,33 +1,31 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
-    //componentes de ItemCard
     discountItem: {
         fontSize: 15,
         color: 'red',
         fontFamily: 'Rockwell',
         fontWeight: '900',
         textAlign: 'left',
-    },    
+    },
     containerItem: {
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        padding: 10, 
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
         backgroundColor: 'white',
         borderRadius: 10,
-        marginHorizontal: 10,
-        marginTop: 5,
-        marginBottom: 5,
+        marginHorizontal: 15,
+        marginVertical: 6,
         elevation: 10,
         shadowColor: '#000000',
         shadowOffset: { width: 10, height: 10 },
-        shadowOpacity: 1, 
+        shadowOpacity: 1,
     },
     containerButton: {
         flex: 0.7,
         padding: 2,
-        justifyContent: 'center', 
-        alignItems: 'center', 
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     button: {
         paddingVertical: 8,
@@ -43,15 +41,15 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 16,
         fontWeight: 'bold',
-      },
+    },
     containerText: {
-        flex: 1, 
+        flex: 1,
     },
     image: {
-        width:100,
-        height:100,
+        width: 100,
+        height: 100,
         marginRight: 10,
-        alignSelf:'center'
+        alignSelf: 'center',
     },
     nameItem: {
         fontSize: 18,
@@ -65,29 +63,58 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: 'Rockwell',
         fontWeight: '100',
-        textAlign: 'left'
+        textAlign: 'left',
     },
-    priceItem:{
+    priceItem: {
         fontSize: 15,
         color: 'black',
         fontFamily: 'Rockwell',
         fontWeight: '900',
-        textAlign: 'left'
+        textAlign: 'left',
     },
-    //componentes de ItemList
     containerP: {
         flex: 1,
-        backgroundColor: '#eeeeee'
+        backgroundColor: '#eeeeee',
+        position: 'relative',
+    },
+    halfBackgroundLeft: {
+        backgroundColor: '#4cad42',
+        position: 'absolute',
+        left: 0,
+        width: '50%',
+        height: '100%',
+        zIndex: -1,
+    },
+    halfBackgroundRight: {
+        backgroundColor: '#0c9942',
+        position: 'absolute',
+        right: 0,
+        width: '50%',
+        height: '100%',
+        zIndex: -1,
     },
     searchBar: {
         height: 40,
         borderColor: '#ccc',
-        borderWidth: 1,
-        borderRadius: 8,
+        borderWidth: 2,
+        borderRadius: 4,
         paddingHorizontal: 10,
         margin: 10,
         backgroundColor: '#fff',
     },
-  });
-  
-  export default styles;
+    overlay: {
+        backgroundColor: '#ffffff',
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        zIndex: 1,
+
+    },
+    containerBarra: {
+        backgroundColor: 'white',
+    },
+});
+
+export default styles;

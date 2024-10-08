@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useReducer, useContext } from "react";
 import { View, Text, Image, ScrollView, Alert, TextInput } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Button, RadioButton } from 'react-native-paper';  
@@ -6,102 +6,114 @@ import styles from "../styles/styleItemDetails";
 import StarsRating from "./StarsRating";
 import { CartContext } from '../hook/CartContext';
 
-const ItemDetails = () => {
-    const [raiting, setRaiting] = useState(0);
-    const [isFeaturesVisible, setIsFeaturesVisible] = useState(false);  
-    const [paymentMethod, setPaymentMethod] = useState(''); 
-    const [showPaymentMethods, setShowPaymentMethods] = useState(false); 
-    const [newComment, setNewComment] = useState(''); 
-    const [showCommentInput, setShowCommentInput] = useState(false); 
-    const [question, setQuestion] = useState(''); 
-    const [showQuestionInput, setShowQuestionInput] = useState(false);
+const initialState = {
+    raiting: 0,
+    isFeaturesVisible: false,
+    paymentMethod: '',
+    showPaymentMethods: false,
+    newComment: '',
+    showCommentInput: false,
+    question: '',
+    showQuestionInput: false,
+};
 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'SET_RAITING':
+            return { ...state, raiting: action.payload };
+        case 'TOGGLE_FEATURES':
+            return { ...state, isFeaturesVisible: !state.isFeaturesVisible };
+        case 'TOGGLE_PAYMENT_METHODS':
+            return {
+                ...state,
+                showPaymentMethods: !state.showPaymentMethods,
+                paymentMethod: !state.showPaymentMethods ? '' : state.paymentMethod,
+            };
+        case 'SET_PAYMENT_METHOD':
+            return { ...state, paymentMethod: action.payload };
+        case 'SET_NEW_COMMENT':
+            return { ...state, newComment: action.payload };
+        case 'TOGGLE_COMMENT_INPUT':
+            return { ...state, showCommentInput: !state.showCommentInput };
+        case 'SET_QUESTION':
+            return { ...state, question: action.payload };
+        case 'TOGGLE_QUESTION_INPUT':
+            return { ...state, showQuestionInput: !state.showQuestionInput };
+        default:
+            return state;
+    }
+};
+
+const ItemDetails = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
     const route = useRoute();
     const { itemData } = route.params;
     const { addToCart } = useContext(CartContext);
 
     const handleCommentButtonClick = () => {
-        let message = '';
-        if (itemData.comments.length === 0) {
-            message = 'No hay comentarios para este artículo.';
-        } else {
-            message = itemData.comments.join('\n\n');
-        }
-
+        let message = itemData.comments.length > 0
+            ? itemData.comments.join('\n\n')
+            : 'No hay comentarios para este artículo.';
         Alert.alert(
             "Comentarios",
             message,
             [
-                {
-                    text: "Cerrar",
-                    style: "cancel",
-                },
-                {
-                    text: "+",
-                    onPress: () => setShowCommentInput(true),
-                }
+                { text: "Cerrar", style: "cancel" },
+                { text: "+", onPress: () => dispatch({ type: 'TOGGLE_COMMENT_INPUT' }) },
             ],
             { cancelable: true }
         );
     };
 
     const handleAddComment = () => {
-        if (newComment.length === 0) {
+        if (state.newComment.length === 0) {
             Alert.alert("El comentario no puede estar vacío.");
             return;
         }
-        if (newComment.length > 200) {
+        if (state.newComment.length > 200) {
             Alert.alert("El comentario no puede tener más de 200 caracteres.");
             return;
         }
-        itemData.comments.push(newComment);
-        setNewComment('');
-        setShowCommentInput(false);
+        itemData.comments.push(state.newComment);
+        dispatch({ type: 'SET_NEW_COMMENT', payload: '' });
+        dispatch({ type: 'TOGGLE_COMMENT_INPUT' });
         Alert.alert("Comentario agregado con éxito.");
     };
 
     const handleCancelComment = () => {
-        setNewComment('');
-        setShowCommentInput(false);
+        dispatch({ type: 'SET_NEW_COMMENT', payload: '' });
+        dispatch({ type: 'TOGGLE_COMMENT_INPUT' });
         Alert.alert("Creación de comentario cancelada.");
     };
 
-    const handleTogglePaymentMethods = () => {
-        if (showPaymentMethods) {
-            setPaymentMethod('');
-        }
-        setShowPaymentMethods(!showPaymentMethods);
-    };
-
     const handleAskButtonClick = () => {
-        setShowQuestionInput(true); 
+        dispatch({ type: 'TOGGLE_QUESTION_INPUT' });
     };
 
     const handleSendQuestion = () => {
-        if (question.length === 0) {
+        if (state.question.length === 0) {
             Alert.alert("La pregunta no puede estar vacía.");
             return;
         }
-        setQuestion(''); 
-        setShowQuestionInput(false);
+        dispatch({ type: 'SET_QUESTION', payload: '' });
+        dispatch({ type: 'TOGGLE_QUESTION_INPUT' });
         Alert.alert("Tu pregunta ha sido enviada.");
     };
 
     const handleCancelQuestion = () => {
-        setQuestion(''); 
-        setShowQuestionInput(false);
+        dispatch({ type: 'SET_QUESTION', payload: '' });
+        dispatch({ type: 'TOGGLE_QUESTION_INPUT' });
         Alert.alert("Pregunta cancelada.");
     };
 
     const handleAddToCart = () => {
-        if (!paymentMethod) {
+        if (!state.paymentMethod) {
             Alert.alert("Debes seleccionar un metodo de pago");
             return;
         }
         addToCart(itemData);
         Alert.alert("Articulo enviado a Carrito de compras");
     };
-    
 
     return (
         <View style={styles.backgroundContainer}>
@@ -132,11 +144,10 @@ const ItemDetails = () => {
                             mode="contained"
                             buttonColor="#4cad42"
                             style={styles.gridButton}
-                            onPress={handleCommentButtonClick} 
+                            onPress={handleCommentButtonClick}
                         >
                             <Text style={styles.TextButtonMenu}>Comentarios</Text>
                         </Button>
-
                         <Button
                             mode="contained"
                             buttonColor="#4cad42"
@@ -145,44 +156,41 @@ const ItemDetails = () => {
                         >
                             <Text style={styles.TextButtonMenu}>Preguntar</Text>
                         </Button>
-
                         <Button
                             mode="contained"
                             buttonColor='#99c454'
                             style={styles.gridButton}
-                            onPress={handleTogglePaymentMethods}
+                            onPress={() => dispatch({ type: 'TOGGLE_PAYMENT_METHODS' })}
                         >
                             <Text style={styles.TextButtonMenu}>
-                                {showPaymentMethods ? "Ocultar" : "Comprar"}
+                                {state.showPaymentMethods ? "Ocultar" : "Comprar"}
                             </Text>
                         </Button>
-                        
                         <Button
                             mode="contained"
                             buttonColor="#4cad42"
                             style={styles.gridButton} 
-                            labelStyle={styles.TextButtonMenu}                       
-                            onPress={() => setIsFeaturesVisible(!isFeaturesVisible)}
+                            onPress={() => dispatch({ type: 'TOGGLE_FEATURES' })}
                         >
-                            {isFeaturesVisible ? "Ocultar" : "Características"} 
+                            {state.isFeaturesVisible ? "Ocultar" : "Características"} 
                         </Button>
                     </View>
 
-                    {isFeaturesVisible && ( 
+                    {state.isFeaturesVisible && (
                         <Text style={styles.ProductFeaturesItem}>{itemData.ProductFeaturesItem}</Text>
                     )}
 
-                    {showPaymentMethods && (
+                    {state.showPaymentMethods && (
                         <View>
                             <View style={styles.paymentMethodsContainer}>
                                 <Text style={styles.paymentMethodsTitle}>Selecciona tu método de pago:</Text>
                                 <RadioButton.Group
-                                    onValueChange={newValue => setPaymentMethod(newValue)}
-                                    value={paymentMethod}
+                                    onValueChange={newValue => dispatch({ type: 'SET_PAYMENT_METHOD', payload: newValue })}
+                                    value={state.paymentMethod}
                                 >
                                     {itemData.paymentMethods.map((method, index) => (
                                         <View style={styles.paymentMethodOption} key={index}>
-                                            <RadioButton value={method.toLowerCase()} color="#4cad42"/>
+                                            <RadioButton value={method.toLowerCase()} color="#4cad42" />
                                             <Text style={styles.categoryItem}>{method}</Text>
                                         </View>
                                     ))}
@@ -193,7 +201,7 @@ const ItemDetails = () => {
                                     mode="contained"
                                     buttonColor="#4cad42"
                                     style={styles.gridButton} 
-                                    onPress={handleAddToCart} // Use the new function
+                                    onPress={handleAddToCart}
                                 >
                                     <Text style={styles.TextButtonMenu}>Enviar al Carrito</Text>
                                 </Button>
@@ -207,20 +215,20 @@ const ItemDetails = () => {
                             {[1, 2, 3, 4, 5].map((starNumber) => (
                                 <StarsRating
                                     key={starNumber}
-                                    onPressFuntion={() => { setRaiting(starNumber) }}
-                                    star={raiting < starNumber ? "staro" : "star"}
+                                    onPressFuntion={() => dispatch({ type: 'SET_RAITING', payload: starNumber })}
+                                    star={state.raiting < starNumber ? "staro" : "star"}
                                 />
                             ))}
                         </View>
                     </View>
 
-                    {showCommentInput && (
+                    {state.showCommentInput && (
                         <View>
                             <TextInput
                                 style={styles.inputComment}
                                 placeholder="Escribe tu comentario (máx. 200 caracteres)"
-                                value={newComment}
-                                onChangeText={setNewComment}
+                                value={state.newComment}
+                                onChangeText={(text) => dispatch({ type: 'SET_NEW_COMMENT', payload: text })}
                                 maxLength={200}
                             />
                             <View style={styles.commentButtonContainer}>
@@ -243,13 +251,13 @@ const ItemDetails = () => {
                         </View>
                     )}
 
-                    {showQuestionInput && (
+                    {state.showQuestionInput && (
                         <View>
                             <TextInput
                                 style={styles.inputComment}
                                 placeholder="Escribe tu pregunta"
-                                value={question}
-                                onChangeText={setQuestion}
+                                value={state.question}
+                                onChangeText={(text) => dispatch({ type: 'SET_QUESTION', payload: text })}
                             />
                             <View style={styles.commentButtonContainer}>
                                 <Button

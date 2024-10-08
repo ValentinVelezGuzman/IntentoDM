@@ -1,94 +1,82 @@
-import * as React from 'react';
-import { View, FlatList, Image, Text, TouchableOpacity, Modal, Button } from 'react-native';
-import { Appbar, Card, Divider } from 'react-native-paper';
-import favoritesStyles from '../styles/favoritesStyles';
-import Navigation from './Navigation';
+import React from 'react';
+import { View, Text, Image, FlatList, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import styles from '../styles/favoritesStyles';
+import usersGroup from '../arrayData/usersGroup';
+import itemGroup from '../arrayData/itemGroup';
 
-const Favorites = ({ navigation }) => {
-    const [modalVisible, setModalVisible] = React.useState(false);
-    const [selectedItem, setSelectedItem] = React.useState(null);
+const MyFavorites = () => {
+    const navigation = useNavigation();
 
-    const favorites = [
-        {
-            id: '1',
-            image: 'https://via.placeholder.com/80',
-            description: 'Product 1 Description',
-            status: 'Available',
-        },
-        {
-            id: '2',
-            image: 'https://via.placeholder.com/80',
-            description: 'Product 2 Description',
-            status: 'Unavailable',
-        },
-        {
-            id: '3',
-            image: 'https://via.placeholder.com/80',
-            description: 'Product 3 Description',
-            status: 'Available',
-        },
-    ];
 
-    const handleItemPress = (item) => {
-        setSelectedItem(item);
-        setModalVisible(true);
-    };
+    const loggedInUser = usersGroup.find(user => user.isLoggedIn);
 
-    const handleCloseModal = () => {
-        setModalVisible(false);
-        setSelectedItem(null);
-    };
+    if (!loggedInUser) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.noUserText}>Por favor, inicia sesión para ver tus favoritos.</Text>
+            </View>
+        );
+    }
 
-    const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => handleItemPress(item)}>
-            <Card style={favoritesStyles.card}>
-                <View style={favoritesStyles.cardContent}>
-                    <Image source={{ uri: item.image }} style={favoritesStyles.cardImage} />
-                    <View style={favoritesStyles.textContainer}>
-                        <Text style={favoritesStyles.description}>{item.description}</Text>
-                        <Text style={favoritesStyles.status}>{item.status}</Text>
-                    </View>
+    const favoriteItemIds = loggedInUser.favorites || [];
+
+    const favoriteItems = favoriteItemIds.map((itemId) => {
+        const itemDetails = itemGroup.find((item) => item.id === itemId);
+        return {
+            ...itemDetails,
+            status: itemDetails ? 'Disponible' : 'No disponible',
+        };
+    });
+
+    const renderFavoriteItem = ({ item }) => {
+        const statusColor = {
+            'Disponible': '#4cad42',
+            'No disponible': '#D9534F', 
+        }[item.status] || '#000'; 
+
+        return (
+            <View style={styles.favoriteItem}>
+                <Image source={item.image} style={styles.thumbnail} />
+                <View style={styles.itemDetails}>
+                    <Text style={styles.nameItem}>{item.nameItem}</Text>
+                    <Text style={styles.itemDescription}>{item.description}</Text>
+                    <Text style={styles.itemStatus}>
+                        Estado: <Text style={[styles.statusText, { color: statusColor }]}>{item.status}</Text>
+                    </Text>
                 </View>
-                <Divider />
-            </Card>
-        </TouchableOpacity>
-    );
+            </View>
+        );
+    };
 
     return (
-        <View style={favoritesStyles.container}>
-            <Appbar.Header style={favoritesStyles.appbar}>
-                <Appbar.BackAction onPress={() => navigation.goBack()} />
-                <Appbar.Content title="My Favorites" />
-            </Appbar.Header>
-            
+        <View style={styles.container}>
+
+            <View style={styles.halfBackgroundLeft} />
+            <View style={styles.halfBackgroundRight} />
+
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Mis Favoritos</Text>
+            </View>
+
             <FlatList
-                data={favorites}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                contentContainerStyle={favoritesStyles.listContainer}
+                data={favoriteItems}
+                renderItem={renderFavoriteItem}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={styles.listContent}
             />
 
-            <Modal
-                visible={modalVisible}
-                transparent={true}
-                animationType="slide"
-                onRequestClose={handleCloseModal}
-            >
-                <View style={favoritesStyles.modalContainer}>
-                    <View style={favoritesStyles.modalContent}>
-                        {selectedItem && (
-                            <>
-                                <Image source={{ uri: selectedItem.image }} style={favoritesStyles.modalImage} />
-                                <Text style={favoritesStyles.modalTitle}>{selectedItem.description}</Text>
-                                <Text style={favoritesStyles.modalStatus}>Status: {selectedItem.status}</Text>
-                                <Button title="Close" onPress={handleCloseModal} color="red" />
-                            </>
-                        )}
-                    </View>
-                </View>
-            </Modal>
+
+            <View style={styles.titleContainer2}>
+                <Pressable
+                    style={styles.buyMoreButton}
+                    onPress={() => navigation.navigate('ItemList')}
+                >
+                    <Text style={styles.buyMoreButtonText}>Comprar más Productos</Text>
+                </Pressable>
+            </View>
         </View>
     );
 };
 
-export default Favorites;
+export default MyFavorites;
