@@ -8,72 +8,197 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     halfBackgroundLeft: {
-        backgroundColor: '#99c454',
+        backgroundColor: '#4cad42',
         position: 'absolute',
         left: 0,
         width: '50%',
         height: '100%',
-        zIndex: -1, // Dejarlo detrás del contenido
+        zIndex: -1,
     },
     halfBackgroundRight: {
-        backgroundColor: '#4cad42',
+        backgroundColor: '#0c9942',
         position: 'absolute',
         right: 0,
         width: '50%',
         height: '100%',
-        zIndex: -1, // Dejarlo detrás del contenido
+        zIndex: -1,
     },
     scrollContent: {
         flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 20, // Espacio para desplazarse
+        paddingVertical: 20,
     },
     card: {
         backgroundColor: 'white',
-        borderRadius: 15, // Bordes redondeados de la tarjeta
+        borderRadius: 15,
         padding: 20,
-        width: width * 0.9, // 90% del ancho de la pantalla
-        minHeight: height * 0.6, // 60% de la altura de la pantalla
-        elevation: 5, // Sombra para Android
-        shadowColor: '#000', // Sombra para iOS
+        width: width * 0.9,
+        minHeight: height * 0.6,
+        elevation: 5,
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 5,
-        marginVertical: 10, // Espacio entre la tarjeta y los bordes
-        alignItems: 'flex-start', // Alinear todo el contenido a la izquierda
+        marginVertical: 10,
+        alignItems: 'flex-start',
+    },
+    buttonLabel: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+    },
+    productInfoContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
+        marginVertical: 20,
+        alignSelf: 'center',
     },
     image: {
-        width: 200, // Tamaño mediano para la imagen
+        width: 200,
         height: 200,
-        alignSelf: 'center', // Centrar la imagen dentro de la tarjeta
-        marginBottom: 20,
+        marginBottom: 10,
     },
     nameItem: {
-        fontSize: 30,
+        fontSize: 25,
         color: 'black',
         fontWeight: '900',
-        textAlign: 'left',
-
-    },
-    priceItem: {
-        fontSize: 20,
-        color: 'black',
-        fontWeight: '900',
-        textAlign: 'left',
-        marginBottom: 10,
+        textAlign: 'center',
     },
     categoryItem: {
         fontSize: 18,
         color: 'gray',
         fontWeight: '400',
+        textAlign: 'center',
+        marginBottom: 5,
+    },
+    starsContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
+        marginVertical: 10,
+        alignSelf: 'center',
+    },
+    elevatedButton: {
+        justifyContent: 'center',
+        alignSelf: 'center',
+    },
+    starsRow: {
+        flexDirection: 'row',
+    },
+    ratingText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        color: 'black',
+        textAlign: 'center',
+    },
+    priceItem: {
+        fontSize: 20,
+        color: 'black',
         textAlign: 'left',
+        marginBottom: 10,
+        fontFamily: 'Helvetica',
+    },
+    ProductFeaturesItem: {
+        fontSize: 20,
+        color: 'black',
+        fontWeight: '400',
+        textAlign: 'justify',
+        fontFamily: 'Helvetica',
+    },
+    descriptionItem: {
+        fontSize: 20,
+        color: 'black',
+        textAlign: 'left',
+        fontFamily: 'Helvetica',
+        marginBottom: 15,
     },
     discountItem: {
         fontSize: 22,
-        color: '#33d4ff',
+        color: '#99c454',
         fontWeight: '900',
         textAlign: 'left',
+        marginBottom: 10,
+    },
+    paymentMethodsContainer: {
+        marginVertical: 10,
+        paddingHorizontal: 20,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    paymentMethodsTitle: {
+        fontSize: 18,
+        fontFamily: 'Helvetica',
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: 'black',
+    },
+    paymentMethodOption: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
+    buttonsGridContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        marginTop: 15,
+    },
+    gridButton: {
+        flexBasis: '48%',
+        marginVertical: 5,
+    },
+    button: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 15,
+        borderRadius: 10,
+        elevation: 3,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    TextButtonMenu: {
+        fontWeight: '900',
+    },
+    ButtonCar: {
+        alignItems: 'center', 
+    },
+    inputComment: {
+        borderColor: '#ccc',
+        borderWidth: 1,
+        padding: 10,
+        marginVertical: 10,
+        width: width * 0.8,
+        borderRadius: 5,
+        fontSize: 16,
+    },
+    commentButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginVertical: 2,
+    },
+    cancelButton: {
+        marginLeft: 10,
     },
 });
 

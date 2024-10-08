@@ -1,90 +1,150 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-const paymentBranchStyles = StyleSheet.create({
+
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
     },
-    appbar: {
-        backgroundColor: '#0c9942', 
+    halfBackgroundLeft: {
+        position: 'absolute',
+        left: 0,
+        width: '50%',
+        height: '100%',
+        backgroundColor: '#4cad42',
+        zIndex: -1,
     },
-    content: {
-        margin: 16,
+    halfBackgroundRight: {
+        position: 'absolute',
+        right: 0,
+        width: '50%',
+        height: '100%',
+        backgroundColor: '#0c9942',
+        zIndex: -1,
+    },
+    cartList: {
         flex: 1,
     },
-    itemContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 8,
-        padding: 8,
-        backgroundColor: '#f5f5f5',
-        borderRadius: 4,
+    cartListContent: {
+        paddingHorizontal: 15,
+        paddingBottom: 10,
+        paddingTop:10,
     },
-    itemImage: {
+    cartItem: {
+        flexDirection: 'row',
+        backgroundColor: '#ffffff',
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+        marginHorizontal: 10,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+    },
+    thumbnail: {
         width: 100,
-        height: 100,
-        marginRight: 16,
+        height: 120,
+        marginRight: 10,
     },
     itemDetails: {
         flex: 1,
+        justifyContent: 'center',
     },
-    itemDescription: {
+    itemName: {
         fontSize: 16,
-        marginBottom: 4,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        color: 'black'
     },
-    itemText: {
+    itemPrice: {
         fontSize: 14,
+        color: '#555',
+    },
+    discountText: {
+        fontSize: 14,
+        color: '#99c454',
+        fontWeight: 'bold',
+    },
+    finalPriceText: {
+        fontSize: 16,
+        color: '#4cad42',
+        fontWeight: 'bold',
+        marginTop: 5,
+    },
+    quantityText: {
+        fontSize: 14,
+        color: 'black',
+        marginTop: 5,
+        fontWeight: 'bold',
+    },
+    paymentSectionContainer: {
+        backgroundColor: '#ffffff',
+        padding: 15,
+        borderRadius: 5,
+        marginTop: 10,
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+    },
+    totalAmountContainer: {
+        backgroundColor: '#4cad42',
+        padding: 15,
+        borderRadius: 5,
+        marginVertical: 10,
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        alignItems: 'center',
+    },
+    totalAmountText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    paymentMethodsContainer: {
+        backgroundColor: '#ffffff',
+        padding: 15,
+        borderRadius: 5,
+        marginVertical: 10,
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+    },
+    paymentMethodsTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 10,
         color: '#333',
     },
-    itemList: {
-        paddingBottom: 16,
-    },
-    summaryCard: {
-        marginVertical: 16,
-        padding: 16,
-        backgroundColor: '#f5f5f5',
-    },
-    paymentCard: {
-        marginVertical: 16,
-        padding: 16,
-    },
-    paymentTitle: {
-        marginBottom: 8,
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    inputField: {
-        marginVertical: 8,
-        padding: 8,
-        backgroundColor: '#f5f5f5',
-        borderRadius: 4,
-    },
-    radioButton: {
+    paymentMethodOption: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 8,
+        marginBottom: 5,
     },
-    radioButtonText: {
-        marginLeft: 8,
+    paymentMethodText: {
+        fontSize: 16,
+        color: '#555',
     },
     payButton: {
-        backgroundColor: '#7DDA48',
-        marginHorizontal: 16,
-        marginBottom: 16, 
+        backgroundColor: '#4cad42',
+        padding: 15,
+        marginHorizontal: 30,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    summaryTitle: {
-        fontSize: 18,
+    payButtonText: {
+        fontSize: 16,
         fontWeight: 'bold',
-        marginBottom: 8,
-    },
-    summaryRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginVertical: 4,
-    },
-    summaryText: {
-        fontWeight: 'bold',
+        color: '#ffffff',
     },
 });
 
-export default paymentBranchStyles;
+export default styles;

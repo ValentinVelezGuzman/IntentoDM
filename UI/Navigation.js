@@ -50,6 +50,11 @@ export default function Navigation({ navigation }) {
         onPress={() => navigation.navigate('Help')}>
         <Text style={styles.botonText1}>PQRS</Text>
       </Pressable>
+      <Pressable 
+        style={styles.boton1} 
+        onPress={() => navigation.navigate('MyPurchases')}>
+        <Text style={styles.botonText1}>Compras</Text>
+      </Pressable>
     </ScrollView>
   );
 }
