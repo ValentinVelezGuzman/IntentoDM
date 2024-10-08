@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, Image, ScrollView, Alert, TextInput } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Button, RadioButton } from 'react-native-paper';  
 import styles from "../styles/styleItemDetails";
 import StarsRating from "./StarsRating";
+import { CartContext } from '../hook/CartContext';
 
 const ItemDetails = () => {
     const [raiting, setRaiting] = useState(0);
@@ -17,6 +18,7 @@ const ItemDetails = () => {
 
     const route = useRoute();
     const { itemData } = route.params;
+    const { addToCart } = useContext(CartContext);
 
     const handleCommentButtonClick = () => {
         let message = '';
@@ -90,6 +92,16 @@ const ItemDetails = () => {
         setShowQuestionInput(false);
         Alert.alert("Pregunta cancelada.");
     };
+
+    const handleAddToCart = () => {
+        if (!paymentMethod) {
+            Alert.alert("Debes seleccionar un metodo de pago");
+            return;
+        }
+        addToCart(itemData);
+        Alert.alert("Articulo enviado a Carrito de compras");
+    };
+    
 
     return (
         <View style={styles.backgroundContainer}>
@@ -181,7 +193,7 @@ const ItemDetails = () => {
                                     mode="contained"
                                     buttonColor="#4cad42"
                                     style={styles.gridButton} 
-                                    onPress={() => alert("Enviado al carrito")}
+                                    onPress={handleAddToCart} // Use the new function
                                 >
                                     <Text style={styles.TextButtonMenu}>Enviar al Carrito</Text>
                                 </Button>
