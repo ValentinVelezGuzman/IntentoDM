@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
         width: width * 0.8,
         borderRadius: 5,
         fontSize: 16,
+        color: 'black'
     },
     commentButtonContainer: {
         flexDirection: 'row',

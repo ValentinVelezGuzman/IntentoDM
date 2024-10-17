@@ -1,10 +1,10 @@
 import React, { useReducer, useContext } from "react";
 import { View, Text, Image, ScrollView, Alert, TextInput } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';//to get navigation parameters.
 import { Button, RadioButton } from 'react-native-paper';  
 import styles from "../styles/styleItemDetails";
 import StarsRating from "./StarsRating";
-import { CartContext } from '../hook/CartContext';
+import { CartContext } from '../hook/CartContext';//context used to add items to the shopping cart.
 
 const initialState = {
     raiting: 0,
@@ -17,9 +17,10 @@ const initialState = {
     showQuestionInput: false,
 };
 
+// current state and an action, and returns a new state depending on the action
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'SET_RAITING':
+        case 'SET_RAITING': //updates the rating with the value provided in action.payload
             return { ...state, raiting: action.payload };
         case 'TOGGLE_FEATURES':
             return { ...state, isFeaturesVisible: !state.isFeaturesVisible };
@@ -27,8 +28,8 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 showPaymentMethods: !state.showPaymentMethods,
-                paymentMethod: !state.showPaymentMethods ? '' : state.paymentMethod,
-            };
+                paymentMethod: !state.showPaymentMethods ? '' : state.paymentMethod, //Ternary operator
+            }; //state, showPyment es la condicion, entonces, si showpaymnet es True, la cambia a false, y si es false, cambia el estado (valor_si_verdadero : valor_si_falso)
         case 'SET_PAYMENT_METHOD':
             return { ...state, paymentMethod: action.payload };
         case 'SET_NEW_COMMENT':
@@ -43,6 +44,7 @@ const reducer = (state, action) => {
             return state;
     }
 };
+
 
 const ItemDetails = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -85,8 +87,8 @@ const ItemDetails = () => {
         dispatch({ type: 'TOGGLE_COMMENT_INPUT' });
         Alert.alert("Creación de comentario cancelada.");
     };
-
-    const handleAskButtonClick = () => {
+//Question View
+    const handleAskButtonClick = () => { //input visibility
         dispatch({ type: 'TOGGLE_QUESTION_INPUT' });
     };
 
