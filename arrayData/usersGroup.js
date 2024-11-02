@@ -18,7 +18,6 @@ const usersGroup = [
                 status: 'En tránsito',
             }
         ],
-        isLoggedIn: true,
         favorites: [6, 7, 8],
     },
     {

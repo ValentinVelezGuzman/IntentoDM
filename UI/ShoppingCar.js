@@ -30,7 +30,7 @@ const ShoppingCar = () => {
     const renderCartItem = ({ item }) => (
         <View style={styles.cartItem}>
             <View style={styles.imageContainer}>
-                <Image source={item.image} style={styles.thumbnail} />
+                <Image  source={{ uri: item.image }} style={styles.thumbnail} />
             </View>
             <View style={styles.itemDetails}>
                 <Text style={styles.itemName}>{item.nameItem}</Text>

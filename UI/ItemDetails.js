@@ -124,7 +124,7 @@ const ItemDetails = () => {
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.card}>
                     <View style={styles.starsContainer}>
-                        <Image style={styles.image} source={itemData.image} />
+                        <Image style={styles.image} source={{ uri: itemData.image }} />
                     </View>
                     <Text style={styles.nameItem}>{itemData.nameItem}</Text>
                     <Text style={styles.categoryItem}>{itemData.category}</Text>

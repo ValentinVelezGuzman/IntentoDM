@@ -4,7 +4,8 @@ import { Button, TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/styleUserRegistration';
 import stylesG from '../styles/globalStyles';
-import usersGroup from '../arrayData/usersGroup';
+//import usersGroup from '../arrayData/usersGroup';
+import { registerNewUser } from '../FirebaseData/fireAuthentication'; 
 
 const UserRegistration = () => {
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ const UserRegistration = () => {
   const [birthDateError, setBirthDateError] = useState('');
 
   const [user, setUser] = useState('');
+  const [nameUser, setNameUser] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [department, setDepartment] = useState('');
@@ -77,17 +79,19 @@ const UserRegistration = () => {
     } else {
       // Crear el nuevo usuario
       const newUser = {
-        id: usersGroup.length + 1, 
-        image: require('../images/imgUsers/u1.png'), 
-        nameUser: user,
+        nameUser: nameUser,
         age: age, 
         user: user,
-        password: password, 
+        address: address,
+        city: city,
+        department: department,
+        email: email,
+        password: password,
       };
     
-      usersGroup.push(newUser);
-      console.log(usersGroup);
-      Alert.alert('Usuario registrado exitosamente');
+      //usersGroup.push(newUser);
+      registerNewUser(newUser)
+      //console.log(usersGroup);  
     }
   };
 
@@ -97,6 +101,16 @@ const UserRegistration = () => {
         <ScrollView>
           <Text style={styles.title1}>Formulario de Registro</Text>
           <View>
+
+          <TextInput
+              label="Ingrese su nombre"
+              mode="outlined"
+              multiline
+              value={nameUser}
+              onChangeText={(text) => setNameUser(text)}
+              theme={{ colors: { primary: '#4cad42' } }}
+              style={styles.inputFullWidth}
+            />
 
             <TextInput
               label="Usuario - Max 10 caracteres"

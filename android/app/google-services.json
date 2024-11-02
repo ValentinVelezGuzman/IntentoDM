@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "99141136630",
+    "project_id": "verdedatabase",
+    "storage_bucket": "verdedatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99141136630:android:e5c19386b628a809d57cd7",
+        "android_client_info": {
+          "package_name": "com.verde"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXrhm3AgMqIw5qrqHKvxBLMZROwDN96pU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

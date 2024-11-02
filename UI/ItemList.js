@@ -1,23 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, Image, Pressable, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from "../styles/styleItemList";
-import itemGroup from "../arrayData/itemGroup";
+import { getItems } from "../FirebaseData/fireItems"; 
 import Navigation from "./Navigation";
 
 const ItemList = () => {
     const navigation = useNavigation();
     const [searchQuery, setSearchQuery] = useState('');
-    const [filteredItems, setFilteredItems] = useState(itemGroup);
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        const unsubscribe = getItems(setItems, setFilteredItems);
+        return () => unsubscribe();
+    }, []);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
         if (query.trim() === '') {
-            setFilteredItems(itemGroup);
+            setFilteredItems(items);
         } else {
-            const filteredData = itemGroup.filter(item => 
-                item.nameItem.toLowerCase().includes(query.toLowerCase()) || 
-                item.category.toLowerCase().includes(query.toLowerCase())
+            const filteredData = items.filter(item => 
+                (item.nameItem && item.nameItem.toLowerCase().includes(query.toLowerCase())) || 
+                (item.category && item.category.toLowerCase().includes(query.toLowerCase()))
             );
             setFilteredItems(filteredData);
         }
@@ -25,7 +31,7 @@ const ItemList = () => {
 
     const ItemCard = ({ itemData }) => (
         <View style={styles.containerItem}>
-            <Image style={styles.image} source={itemData.image} />
+            <Image style={styles.image} source={{ uri: itemData.image }} />
             <View style={styles.containerText}>
                 <Text style={styles.nameItem}>{itemData.nameItem}</Text>
                 <Text style={styles.descriptionItem}>{itemData.description}</Text>
@@ -50,10 +56,9 @@ const ItemList = () => {
 
     return (
         <View style={styles.containerP}>
-            {/* Background split */}
             <View style={styles.halfBackgroundLeft} />
             <View style={styles.halfBackgroundRight} />
-            
+
             <View style={styles.containerBarra}>
                 <View style={styles.overlay}>
                     <Navigation navigation={navigation} />

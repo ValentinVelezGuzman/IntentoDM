@@ -27,7 +27,7 @@ const PaymentBranch = () => {
 
         return (
             <View style={styles.cartItem}>
-                <Image source={item.image} style={styles.thumbnail} />
+                <Image source={{ uri: item.image }} style={styles.thumbnail} />
                 <View style={styles.itemDetails}>
                     <Text style={styles.itemName}>{item.nameItem}</Text>
                     <Text style={styles.itemPrice}>Precio Original: ${item.price}</Text>

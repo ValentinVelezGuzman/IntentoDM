@@ -9,7 +9,7 @@ const StarsRating = ({onPressFuntion, star}) => {
         <Icon 
             name={star}
             size={25}
-            color={star=='star' ? '#FFD700' : '#000'}//operador ternario
+            color={star=='star' ? '#FFD700' : '#000'}//Ternar Oper
         />
     </Pressable>
   )

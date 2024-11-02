@@ -4,18 +4,16 @@ import { TextInput, Button } from 'react-native-paper';
 import styles from '../styles/styleLogin';
 import stylesG from '../styles/globalStyles';
 import usersGroup from '../arrayData/usersGroup';
+import { loginUser } from '../FirebaseData/fireAuthentication';
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState(''); 
   const [password, setPassword] = useState(''); 
 
   const handleLogin = () => {
-    const user = usersGroup.find(
-      (u) => u.user === username && u.password === password
-    );
-    if (user) {
-      navigation.navigate('ItemList');
-    } else {
+    try{
+      const user = loginUser(username, password, navigation)
+    }catch {
       Alert.alert('Error', 'Usuario o Contraseña no registrados');
     }
   };
