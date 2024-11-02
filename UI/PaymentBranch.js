@@ -1,15 +1,36 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, Image, FlatList, Pressable } from 'react-native';
+import { View, Text, Image, FlatList, Pressable, Alert } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { CartContext } from '../hook/CartContext';
 import styles from '../styles/paymentBranchStyles';
+import { handleAPI } from '../api/mercadoPagoAPI';
+import InAppBrowser from 'react-native-inappbrowser-reborn';
 
 const PaymentBranch = () => {
     const { cartItems } = useContext(CartContext);
     const [totalAmount, setTotalAmount] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState('PSE');
 
-// Calculate the total whenever the items in the cart change
+    const handleBuyItems = async (items) => {
+        if (items.length === 0) {
+            Alert.alert("Carrito vacío", "No hay artículos en el carrito para proceder al pago.");
+            return;
+        }
+        try {
+            const data = await handleAPI(items);
+            if (!data) {
+                console.log("Error en la obtención del enlace de pago.");
+                Alert.alert("Error", "Hubo un problema al procesar el pago.");
+                return;
+            }
+            InAppBrowser.open(data);
+        } catch (error) {
+            console.error("Error al iniciar el proceso de pago:", error);
+            Alert.alert("Error", "Ocurrió un problema al conectar con el servicio de pago.");
+        }
+    };
+
+    // Calculate the total whenever the items in the cart change
     useEffect(() => {
         const newTotal = cartItems.reduce((sum, item) => {
             const itemPrice = item.discount 
@@ -43,13 +64,8 @@ const PaymentBranch = () => {
         );
     };
 
-    const handlePayment = () => {
-        alert(`Procediendo con el pago mediante: ${paymentMethod}`);
-    };
-
     return (
         <View style={styles.container}>
-            
             <View style={styles.halfBackgroundLeft} />
             <View style={styles.halfBackgroundRight} />
 
@@ -87,9 +103,11 @@ const PaymentBranch = () => {
                     </RadioButton.Group>
                 </View>
 
-                <Pressable style={styles.payButton} 
-                onPress={handlePayment}>
-                    <Text style={styles.payButtonText}>Pagar</Text>
+                <Pressable 
+                    style={styles.payButton} 
+                    onPress={async () => await handleBuyItems(cartItems)}
+                >
+                    <Text style={styles.payButtonText}>Pagar MercadoPago</Text>
                 </Pressable>
             </View>
         </View>
